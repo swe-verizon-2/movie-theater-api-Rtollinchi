@@ -24,4 +24,16 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.get("/:id/users", async (req, res, next) => {
+  try {
+    const show = await Show.findByPk(req.params.id);
+
+    const users = await show.getUsers();
+
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
