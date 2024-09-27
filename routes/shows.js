@@ -6,9 +6,16 @@ const { check, validationResult } = require("express-validator");
 
 router.get("/", async (req, res, next) => {
   try {
-    const allShows = await Show.findAll();
+    const genre = req.query.genre;
+    let shows;
 
-    res.json(allShows);
+    if (genre) {
+      shows = await Show.findAll({ where: { genre: genre } });
+    } else {
+      shows = await Show.findAll();
+    }
+
+    res.json(shows);
   } catch (error) {
     next(error);
   }
