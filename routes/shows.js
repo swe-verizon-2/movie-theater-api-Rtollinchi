@@ -47,4 +47,14 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const deletedShow = Show.destroy({ where: { id: req.params.id } });
+
+    res.json(deletedShow);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
