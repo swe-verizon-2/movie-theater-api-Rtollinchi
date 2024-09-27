@@ -36,7 +36,7 @@ router.get("/:id/users", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id/available", async (req, res, next) => {
   try {
     const show = await Show.findByPk(req.params.id);
     const updatedShow = await show.update({ available: req.body.available });
